@@ -4,6 +4,7 @@ import time
 from datetime import date
 
 # --- CONFIGURATION ---
+# Updated to August 1st, 2026
 TARGET_DATE = pd.Timestamp("2026-08-01 00:00:00").tz_localize('Asia/Kolkata')
 TITLE = "Countdown to your birthday 🎂"
 VALID_USER = "Heena"
@@ -74,13 +75,16 @@ def main():
             minutes, seconds = divmod(remainder, 60)
 
             # Update the main placeholder with the timer card
+            # NOTE: I changed the 'until' line to dynamically show the target month/day
             main_placeholder.markdown(f"""
                 <div class="timer-card">
                     <div class="title">{TITLE}</div>
                     <div class="time-display">
                         {days}d {hours:02d}h {minutes:02d}m {seconds:02d}s
                     </div>
-                    <div style="margin-top:10px; opacity:0.7;">until May 01, 2026</div>
+                    <div style="margin-top:10px; opacity:0.7;">
+                        until {TARGET_DATE.strftime('%B %d, %Y')}
+                    </div>
                 </div>
             """, unsafe_allow_html=True)
             
@@ -88,4 +92,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-  
